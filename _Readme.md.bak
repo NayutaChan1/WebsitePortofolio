@@ -1,0 +1,29 @@
+# Rafael Febrian - Personal Portfolio Website
+
+> Welcome to the repository of my personal portfolio website! This platform serves as a digital showcase of my journey as a Full-Stack Developer, my explorations in AI/Computer Vision, and my write-ups for Cybersecurity (CTF) challenges.
+
+## 🌐 Live Demo
+Check out the live website here: [Insert Live URL, e.g., https://rafaelfebrian.com] <<-- still dummy
+
+## ✨ Features
+*   **Project Showcase:** Detailed breakdowns of my highlighted projects, including microservices architectures and AI-integrated mobile applications.
+*   **Interactive Resume:** A digital, easy-to-read version of my professional experience and technical skills.
+*   **Blog / Write-ups:** A dedicated section for technical documentation and capture-the-flag (CTF) solutions.
+*   **Responsive Design:** Fully optimized for both desktop and mobile viewing.
+
+## 💻 Tech Stack
+This project is built with modern web technologies:
+*   **Frontend:** [e.g., Vue 3 / React], TypeScript, Tailwind CSS
+*   **Backend (If applicable):** [e.g., NestJS] 
+*   **Infrastructure:** [e.g., Docker, deployed on Proxmox / Vercel]
+
+## 🚀 Getting Started
+To run this project locally, follow these steps:
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) and a package manager (`npm`, `yarn`, or `pnpm`) installed.
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/YourUsername/your-repo-name.git](https://github.com/YourUsername/your-repo-name.git)
