@@ -5,11 +5,11 @@ import { contacts } from "../data/profile";
 export default function Contact() {
   return (
     <Section id="contact">
-      <Prompt command="contact --send" cwd="~" as="h2" caret />
+      <Prompt command="cat contact.txt" cwd="~" as="h2" caret />
 
       <div className="mt-8">
         <p className="prose-body max-w-2xl">
-          Open to internships and freelance work — web, mobile or data. Fastest
+          Open to internships and freelance work: web, mobile or data. Fastest
           way to reach me is email; I answer within a day.
         </p>
 

@@ -1,21 +1,74 @@
+import Image from "next/image";
 import Prompt from "./Prompt";
 import Section from "./Section";
-import { projects, type Project } from "../data/projects";
+import VideoEmbed from "./VideoEmbed";
+import { projects, type Project, type Screenshot } from "../data/projects";
+
+/** `ls` prints in name order; the panels below stay in the data's own order. */
+const listed = [...projects].sort((a, b) => a.dir.localeCompare(b.dir));
 
 function Listing({ project }: { project: Project }) {
   return (
     <a
       href={`#${project.slug}`}
-      className="group flex flex-wrap items-baseline gap-x-4 gap-y-1 py-1.5 text-xs sm:text-sm"
+      className="group block py-1.5 text-xs sm:text-sm"
     >
-      <span className="text-dim">{project.perms}</span>
-      <span className="hidden text-dim sm:inline">rafael staff</span>
-      <span className="text-dim">{project.kind}</span>
-      <span className="text-dim">{project.date}</span>
       <span className="text-blue underline-offset-4 group-hover:text-accent group-hover:underline">
         {project.dir}/
       </span>
     </a>
+  );
+}
+
+function Screens({ shots }: { shots: Screenshot[] }) {
+  /** Phone captures are tall, so they get their own narrower grid. */
+  const allPhones = shots.every((shot) => shot.shape === "phone");
+
+  return (
+    <div className="border-b border-line p-5 sm:p-8">
+      <h4 className="text-xs tracking-[0.2em] text-accent uppercase">
+        screens
+      </h4>
+
+      <ul
+        className={`mt-5 grid gap-x-4 gap-y-6 ${
+          allPhones
+            ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+            : "sm:grid-cols-2"
+        }`}
+      >
+        {shots.map((shot) => (
+          <li key={shot.caption}>
+            <div
+              className={`relative overflow-hidden border border-line bg-bg ${
+                shot.shape === "phone" ? "aspect-9/20" : "aspect-16/10"
+              }`}
+            >
+              {shot.src ? (
+                <Image
+                  src={shot.src}
+                  alt={shot.alt}
+                  fill
+                  sizes={
+                    shot.shape === "phone"
+                      ? "(min-width: 1024px) 20vw, (min-width: 640px) 30vw, 45vw"
+                      : "(min-width: 640px) 50vw, 100vw"
+                  }
+                  className="object-contain"
+                />
+              ) : (
+                <div className="shot-empty flex h-full items-center justify-center p-2">
+                  <span className="border border-line bg-bg px-2 py-1 text-center text-[11px] text-dim">
+                    {shot.alt}
+                  </span>
+                </div>
+              )}
+            </div>
+            <p className="mt-2 text-xs text-dim">{shot.caption}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -50,7 +103,9 @@ function Panel({ project }: { project: Project }) {
             {project.context}
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div
+            className={`flex flex-wrap gap-3 ${project.links.length > 0 ? "mt-6" : ""}`}
+          >
             {project.links.map((link, i) => (
               <a
                 key={link.href}
@@ -73,6 +128,23 @@ function Panel({ project }: { project: Project }) {
             ))}
           </div>
         </header>
+
+        {/* demo */}
+        {project.video && (
+          <div className="border-b border-line p-5 sm:p-8">
+            <h4 className="text-xs tracking-[0.2em] text-accent uppercase">
+              demo
+            </h4>
+            <div className="mt-5 max-w-4xl">
+              <VideoEmbed {...project.video} />
+            </div>
+          </div>
+        )}
+
+        {/* screens */}
+        {project.screenshots && project.screenshots.length > 0 && (
+          <Screens shots={project.screenshots} />
+        )}
 
         {/* overview */}
         <div className="border-b border-line p-5 sm:p-8">
@@ -164,16 +236,15 @@ function Panel({ project }: { project: Project }) {
 export default function Work() {
   return (
     <Section id="work">
-      <Prompt command="ls -la" cwd="~/work" as="h2" />
+      <Prompt command="ls ~/work" cwd="~" as="h2" />
 
       <div className="mt-5 border-l-2 border-line pl-4 sm:pl-5">
-        <p className="text-xs text-dim">total {projects.length}</p>
-        {projects.map((project) => (
+        {listed.map((project) => (
           <Listing key={project.slug} project={project} />
         ))}
         <p className="pt-2 text-xs text-dim">
           <span className="text-accent"># </span>
-          more coming — this listing grows as projects ship
+          more coming, this listing grows as projects ship
         </p>
       </div>
 

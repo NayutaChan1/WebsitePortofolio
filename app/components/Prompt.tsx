@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 /**
  * A command line. Every section opens with one, and the command names what
- * the section actually contains — the heading is the command.
+ * the section actually contains. The heading is the command.
  */
 export default function Prompt({
   command,

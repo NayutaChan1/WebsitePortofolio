@@ -18,13 +18,13 @@ const plexSans = IBM_Plex_Sans({
 });
 
 const description =
-  "Rafael Febrian — full-stack and mobile developer working in TypeScript, Vue, Nest.js, Kotlin and Jetpack Compose, with a background in data and machine learning.";
+  "Rafael Febrian builds full stack web and Android apps in TypeScript, Vue, Nest.js, Kotlin and Jetpack Compose, with a background in data and machine learning.";
 
 export const metadata: Metadata = {
-  title: "Rafael Febrian — Full-Stack Developer",
+  title: "Rafael Febrian · Full Stack Developer",
   description,
   openGraph: {
-    title: "Rafael Febrian — Full-Stack Developer",
+    title: "Rafael Febrian · Full Stack Developer",
     description,
     type: "website",
   },

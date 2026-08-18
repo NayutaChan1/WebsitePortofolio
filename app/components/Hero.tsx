@@ -36,7 +36,7 @@ export default function Hero() {
             ))}
           </p>
           <p className="mt-2 text-sm text-muted">
-            {profile.school} — {profile.location}
+            {profile.school} · {profile.job} · {profile.location}
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export default function Hero() {
             className="group border border-accent px-4 py-2.5 text-sm text-accent transition-colors hover:bg-accent hover:text-bg"
           >
             <span className="text-dim group-hover:text-bg">$ </span>
-            ./view-work.sh
+            ./work.sh
           </a>
           <a
             href="#contact"
@@ -64,9 +64,9 @@ export default function Hero() {
           className="rise mt-14 hidden text-xs text-dim sm:block"
           style={{ animationDelay: "1250ms" }}
         >
-          <span className="text-accent">tip</span> — this page is a tmux
+          <span className="text-accent">tip</span> · this page is a tmux
           session. Press{" "}
-          <kbd className="border border-line px-1 text-muted">0</kbd>–
+          <kbd className="border border-line px-1 text-muted">0</kbd> to{" "}
           <kbd className="border border-line px-1 text-muted">4</kbd> to switch
           windows, <kbd className="border border-line px-1 text-muted">?</kbd>{" "}
           for keys.

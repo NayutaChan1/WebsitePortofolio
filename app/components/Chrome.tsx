@@ -5,7 +5,7 @@ import { windows } from "./windows";
 import { profile } from "../data/profile";
 
 const KEY_HELP = [
-  { keys: "0 – 4", does: "jump to window" },
+  { keys: "0 to 4", does: "jump to window" },
   { keys: "j / k", does: "next / previous window" },
   { keys: "g / G", does: "top / bottom" },
   { keys: "?", does: "toggle this help" },
@@ -138,7 +138,7 @@ export default function Chrome() {
 
   return (
     <>
-      {/* Title bar — a real terminal retitles itself with the working directory */}
+      {/* Title bar: a real terminal retitles itself with the working directory */}
       <header className="fixed inset-x-0 top-0 z-40 h-11 border-b border-line bg-surface/95 backdrop-blur-sm">
         <div className="mx-auto flex h-full max-w-6xl items-center gap-3 px-4 sm:px-6">
           <div className="flex shrink-0 items-center gap-2" aria-hidden>
@@ -152,7 +152,7 @@ export default function Chrome() {
             </span>
             <span className="text-dim">:</span>
             <span className="text-blue">{path}</span>
-            <span className="text-dim"> — tmux</span>
+            <span className="text-dim"> · tmux</span>
           </p>
           <span className="ml-auto hidden shrink-0 text-[11px] text-dim sm:inline">
             80×24
@@ -160,7 +160,7 @@ export default function Chrome() {
         </div>
       </header>
 
-      {/* Status bar — the signature: tmux window list doubling as navigation */}
+      {/* Status bar: the tmux window list, doubling as navigation */}
       <nav
         aria-label="Sections"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface"
@@ -216,7 +216,7 @@ export default function Chrome() {
 
           <span className="hidden shrink-0 items-center gap-2 text-dim sm:flex">
             <span className="text-line">│</span>
-            <time suppressHydrationWarning>{clock ?? "--:--"}</time>
+            <time suppressHydrationWarning>{clock ?? "··:··"}</time>
           </span>
         </div>
       </nav>

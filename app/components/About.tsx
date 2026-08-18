@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+import Image from "next/image";
 import Prompt from "./Prompt";
 import Section from "./Section";
 import { profile } from "../data/profile";
@@ -20,18 +23,44 @@ const SWATCHES = [
   "bg-dim",
 ];
 
+/**
+ * Resolved at build time. Drop the portrait into `public/` and it appears;
+ * with no file there, the block prints the ASCII monogram instead.
+ */
+function findAvatar() {
+  const name = profile.avatarNames.find((file) =>
+    fs.existsSync(path.join(process.cwd(), "public", file)),
+  );
+  return name ? `/${name}` : null;
+}
+
 export default function About() {
+  const avatar = findAvatar();
+
   return (
     <Section id="about">
       <Prompt command="neofetch" cwd="~" as="h2" />
 
       <div className="mt-8 flex flex-col gap-8 border border-line bg-surface/50 p-5 sm:p-8 md:flex-row md:gap-12">
-        <pre
-          aria-label="ASCII monogram: R F"
-          className="shrink-0 text-[10px] leading-[1.15] text-accent sm:text-xs"
-        >
-          {LOGO}
-        </pre>
+        {avatar ? (
+          <div className="relative aspect-square w-40 shrink-0 overflow-hidden border border-line bg-surface-2 sm:w-44">
+            <Image
+              src={avatar}
+              alt={profile.avatarAlt}
+              fill
+              sizes="176px"
+              priority
+              className="object-cover"
+            />
+          </div>
+        ) : (
+          <pre
+            aria-label="ASCII monogram: R F"
+            className="shrink-0 text-[10px] leading-[1.15] text-accent sm:text-xs"
+          >
+            {LOGO}
+          </pre>
+        )}
 
         <div className="min-w-0 flex-1">
           <p className="text-sm">
