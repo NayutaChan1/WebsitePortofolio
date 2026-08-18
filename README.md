@@ -80,6 +80,29 @@ file. `npm run build` always sees it.
 Any aspect ratio works; the frame is square and the image is cropped to fill it, so a portrait
 crop looks best.
 
+### Your CV
+
+Save it into `public/` as `resume.pdf` (or `cv.pdf`). A `$ wget resume.pdf` button appears at the
+top of the Contact section on its own, and with no such file there the button is not rendered at
+all, so the page never offers a download that 404s.
+
+Like the portrait, the lookup runs at build time, so restart `npm run dev` after adding the file.
+
+### The link preview card
+
+[`app/opengraph-image.tsx`](app/opengraph-image.tsx) draws the 1200x630 image that LinkedIn,
+WhatsApp and X show when the link is shared. It renders the same tmux window as the page, pulling
+the name, roles and school straight from `profile.ts`, so it cannot drift out of date. Preview it
+at <http://localhost:3000/opengraph-image>.
+
+The fonts come from [`assets/fonts/`](assets/fonts) rather than the network, so the build does not
+depend on Google Fonts being reachable.
+
+**Set the site URL after deploying.** Absolute URLs are required in preview cards. On Vercel the
+production host is filled in automatically; once a custom domain is attached, set
+`NEXT_PUBLIC_SITE_URL=https://yourdomain.com` in the project's environment variables and redeploy,
+otherwise shared links point at the vercel.app host.
+
 ### Adding a demo video
 
 Give a project a `video` and a "demo" block appears above its screenshots:

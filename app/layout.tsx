@@ -20,13 +20,33 @@ const plexSans = IBM_Plex_Sans({
 const description =
   "Rafael Febrian builds full stack web and Android apps in TypeScript, Vue, Nest.js, Kotlin and Jetpack Compose, with a background in data and machine learning.";
 
+const title = "Rafael Febrian · Full Stack Developer";
+
+/**
+ * Absolute URLs for the preview card. Vercel fills the production host in on
+ * its own; set NEXT_PUBLIC_SITE_URL once you point a domain at the deploy.
+ */
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
 export const metadata: Metadata = {
-  title: "Rafael Febrian · Full Stack Developer",
+  metadataBase: new URL(siteUrl),
+  title,
   description,
   openGraph: {
-    title: "Rafael Febrian · Full Stack Developer",
+    title,
     description,
     type: "website",
+    url: siteUrl,
+    siteName: title,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
   },
 };
 

@@ -1,8 +1,22 @@
+import fs from "node:fs";
+import path from "node:path";
 import Prompt from "./Prompt";
 import Section from "./Section";
 import { contacts } from "../data/profile";
 
+/** Save your CV as one of these in public/ and the button appears on its own. */
+const RESUME_NAMES = ["resume.pdf", "cv.pdf"];
+
+function findResume() {
+  const name = RESUME_NAMES.find((file) =>
+    fs.existsSync(path.join(process.cwd(), "public", file)),
+  );
+  return name ? `/${name}` : null;
+}
+
 export default function Contact() {
+  const resume = findResume();
+
   return (
     <Section id="contact">
       <Prompt command="cat contact.txt" cwd="~" as="h2" caret />
@@ -12,6 +26,20 @@ export default function Contact() {
           Open to internships and freelance work: web, mobile or data. Fastest
           way to reach me is email; I answer within a day.
         </p>
+
+        {resume && (
+          <a
+            href={resume}
+            download
+            className="group mt-8 inline-block border border-accent px-4 py-2.5 text-sm text-accent transition-colors hover:bg-accent hover:text-bg"
+          >
+            <span className="text-dim group-hover:text-bg">$ </span>
+            wget{" "}
+            <span className="underline underline-offset-4">
+              {resume.replace("/", "")}
+            </span>
+          </a>
+        )}
 
         <ul className="mt-10 max-w-3xl border-t border-line">
           {contacts.map((contact) => (
